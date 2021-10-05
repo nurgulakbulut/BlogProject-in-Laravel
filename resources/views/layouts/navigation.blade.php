@@ -14,6 +14,9 @@
                 <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                     {{ __('Dashboard') }}
                 </x-nav-link>
+                <x-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts.index')">
+                    {{ __('Posts') }}
+                </x-nav-link>
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -23,7 +26,7 @@
                 @auth
                     <x-dropdown id="settingsDropdown">
                         <x-slot name="trigger">
-                            {{ Auth::user()->name }}
+                            {{ Auth::user()->name }}   {{ Auth::user()->posts()->count() }}
                         </x-slot>
 
                         <x-slot name="content">
@@ -39,6 +42,14 @@
                             </form>
                         </x-slot>
                     </x-dropdown>
+                    @else
+                     <x-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
+                    {{ __('Login') }}
+                     </x-nav-link>
+
+                      <x-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
+                    {{ __('Register') }}
+                     </x-nav-link>
                 @endauth
             </ul>
         </div>
